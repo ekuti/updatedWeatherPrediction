@@ -1,7 +1,8 @@
 import streamlit as st
 import pandas as pd
 import numpy as np
-import matplotlib.pyplot as plt
+##import matplotlib.pyplot as plt
+from matplotlib import pyplot as plt
 pd.set_option('mode.chained_assignment', None)
 
 from keras.models import Sequential
