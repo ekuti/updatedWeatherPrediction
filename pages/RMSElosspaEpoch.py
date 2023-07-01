@@ -61,21 +61,11 @@ testX = np.reshape(testX, (testX.shape[0], 1, testX.shape[1]))
 print("Training data shape:", trainX.shape,', ',trainY.shape)
 print("Test data shape:", testX.shape,', ',testY.shape)
 
-st.title("Building the Model")
+st.title("Plot RMSE loss over Epochs")
 st.markdown(
-    "Keras model with SimpleRNN layer We build a simple function to define the RNN model. It uses a single neuron for the output layer because we are predicting a real-valued number here. As activation, it uses the ReLU function. Following arguments are supported.")
-st.markdown(
-    "Neurons in RNN layer"
+    "Note that the loss metric available in the history attribute of the model is the MSE loss and you have to take a square-root to compute the RMSE loss."
 )
-st.markdown(
-    "Embedding length(i.e the length we chose)"
-)
-st.markdown(
-     "Neurons in densly connected layer"
-)
-st.markdown(
-      "learning rate"
-)
+
 
 def build_simple_rnn(num_units=128, embedding=4,num_dense=32,lr=0.001):
     """
@@ -97,5 +87,33 @@ def build_simple_rnn(num_units=128, embedding=4,num_dense=32,lr=0.001):
     return model 
 
 model_humidity = build_simple_rnn(num_units=128,num_dense=32,embedding=8,lr=0.0005)
-model_humidity.summary(print_fn=lambda x: st.text(x))
+#model_humidity.summary(print_fn=lambda x: st.text(x))
+
+class MyCallback(Callback):
+    def on_epoch_end(self, epoch, logs=None):
+        if (epoch+1) % 50 == 0 and epoch>0:
+            
+            print("Epoch number {} done".format(epoch+1))
+
+batch_size=8
+num_epochs = 1000
+
+
+#model_humidity.fit(trainX,trainY, 
+          #epochs=num_epochs, 
+          #batch_size=batch_size, 
+          #callbacks=[MyCallback()],verbose=0)
+model_humidity.fit(trainX,trainY, 
+          epochs=num_epochs, 
+          batch_size=batch_size, 
+          callbacks=[MyCallback()],verbose=0)
+plt.figure(figsize=(7,5))
+plt.title("RMSE loss over epochs",fontsize=16)
+plt.plot(np.sqrt(model_humidity.history.history['loss']),c='k',lw=2)
+plt.grid(True)
+plt.xlabel("Epochs",fontsize=14)
+plt.ylabel("Root-mean-squared error",fontsize=14)
+plt.xticks(fontsize=14)
+plt.yticks(fontsize=14)
+plt.show()          
 

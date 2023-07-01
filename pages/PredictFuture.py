@@ -26,8 +26,8 @@ train = np.array(humidity_SF['San Francisco'][:Tp])
 test = np.array(humidity_SF['San Francisco'][Tp:])
 
 
-print("Train data length:", train.shape)
-print("Test data length:", test.shape)
+#st.text("Train data length:", train.shape)
+#st.text("Test data length:", test.shape)
 
 
 train=train.reshape(-1,1)
@@ -58,25 +58,17 @@ testX,testY =convertToMatrix(test,step)
 trainX = np.reshape(trainX, (trainX.shape[0], 1, trainX.shape[1]))
 testX = np.reshape(testX, (testX.shape[0], 1, testX.shape[1]))
 
-print("Training data shape:", trainX.shape,', ',trainY.shape)
-print("Test data shape:", testX.shape,', ',testY.shape)
+#print("Training data shape:", trainX.shape,', ',trainY.shape)
+#print("Test data shape:", testX.shape,', ',testY.shape)
 
-st.title("Building the Model")
+st.title("Now predict the future points")
 st.markdown(
-    "Keras model with SimpleRNN layer We build a simple function to define the RNN model. It uses a single neuron for the output layer because we are predicting a real-valued number here. As activation, it uses the ReLU function. Following arguments are supported.")
-st.markdown(
-    "Neurons in RNN layer"
+    "Now, we can generate predictions for the future by passing testX to the trained model."
+    " "
+    "#See the magic!"
+    "When we plot the predicted vector, we see it matches closely the true values and that is amazing given how little training data was used and how far in the future it had to predict. Time-series techniques like ARIMA, Exponential smoothing, cannot predict very far into the future and their confidence interval quickly grows beyond being useful."
+    "Note carefully how the model is able to predict sudden increase in humidity around time-points 12000. There was no indication of such shape or pattern of the data in the training set, yet, it is able to predict the general shape pretty well from the first 7000 data points"
 )
-st.markdown(
-    "Embedding length(i.e the length we chose)"
-)
-st.markdown(
-     "Neurons in densly connected layer"
-)
-st.markdown(
-      "learning rate"
-)
-
 def build_simple_rnn(num_units=128, embedding=4,num_dense=32,lr=0.001):
     """
     Builds and compiles a simple RNN model
@@ -97,5 +89,51 @@ def build_simple_rnn(num_units=128, embedding=4,num_dense=32,lr=0.001):
     return model 
 
 model_humidity = build_simple_rnn(num_units=128,num_dense=32,embedding=8,lr=0.0005)
-model_humidity.summary(print_fn=lambda x: st.text(x))
+#model_humidity.summary(print_fn=lambda x: st.text(x))
 
+class MyCallback(Callback):
+    def on_epoch_end(self, epoch, logs=None):
+        if (epoch+1) % 50 == 0 and epoch>0:
+            ""
+            #print("Epoch number {} done".format(epoch+1))
+
+batch_size=8
+num_epochs = 1000
+
+
+#model_humidity.fit(trainX,trainY, 
+          #epochs=num_epochs, 
+          #batch_size=batch_size, 
+          #callbacks=[MyCallback()],verbose=0)
+
+
+#model_humidity.fit(trainX,trainY, 
+          #epochs=num_epochs, 
+          #batch_size=batch_size, 
+          #callbacks=[MyCallback()],verbose=0)
+#plt.figure(figsize=(7,5))
+#plt.title("RMSE loss over epochs",fontsize=16)
+#plt.plot(np.sqrt(model_humidity.history.history['loss']),c='k',lw=2)
+#plt.grid(True)
+#plt.xlabel("Epochs",fontsize=14)
+#plt.ylabel("Root-mean-squared error",fontsize=14)
+#plt.xticks(fontsize=14)
+#plt.yticks(fontsize=14)
+#plt.show()          
+
+
+
+
+trainPredict = model_humidity.predict(trainX)
+testPredict= model_humidity.predict(testX)
+predicted=np.concatenate((trainPredict,testPredict),axis=0)
+
+
+
+
+
+plt.figure(figsize=(10,4))
+plt.title("This is what the model predicted",fontsize=18)
+plt.plot(testPredict,c='orange')
+plt.grid(True)
+plt.show()

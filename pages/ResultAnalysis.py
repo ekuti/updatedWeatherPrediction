@@ -26,8 +26,8 @@ train = np.array(humidity_SF['San Francisco'][:Tp])
 test = np.array(humidity_SF['San Francisco'][Tp:])
 
 
-print("Train data length:", train.shape)
-print("Test data length:", test.shape)
+#st.text("Train data length:", train.shape)
+#st.text("Test data length:", test.shape)
 
 
 train=train.reshape(-1,1)
@@ -58,24 +58,16 @@ testX,testY =convertToMatrix(test,step)
 trainX = np.reshape(trainX, (trainX.shape[0], 1, trainX.shape[1]))
 testX = np.reshape(testX, (testX.shape[0], 1, testX.shape[1]))
 
-print("Training data shape:", trainX.shape,', ',trainY.shape)
-print("Test data shape:", testX.shape,', ',testY.shape)
+#print("Training data shape:", trainX.shape,', ',trainY.shape)
+#print("Test data shape:", testX.shape,', ',testY.shape)
 
-st.title("Building the Model")
+st.title("Result and analysis")
 st.markdown(
-    "Keras model with SimpleRNN layer We build a simple function to define the RNN model. It uses a single neuron for the output layer because we are predicting a real-valued number here. As activation, it uses the ReLU function. Following arguments are supported.")
-st.markdown(
-    "Neurons in RNN layer"
+    "What did the model see while training? We are emphasizing and showing again what exactly the model see during training. If you look above, the model fitting code is,"
+    "model_humidity.fit(trainX,trainY, epochs=num_epochs, batch_size=batch_size, callbacks=[MyCallback()],verbose=0)"
+    "So, the model was fitted with trainX which is plotted below, and trainY which is just the 8 step shifted and shaped vector."
 )
-st.markdown(
-    "Embedding length(i.e the length we chose)"
-)
-st.markdown(
-     "Neurons in densly connected layer"
-)
-st.markdown(
-      "learning rate"
-)
+
 
 def build_simple_rnn(num_units=128, embedding=4,num_dense=32,lr=0.001):
     """
@@ -97,5 +89,42 @@ def build_simple_rnn(num_units=128, embedding=4,num_dense=32,lr=0.001):
     return model 
 
 model_humidity = build_simple_rnn(num_units=128,num_dense=32,embedding=8,lr=0.0005)
-model_humidity.summary(print_fn=lambda x: st.text(x))
+#model_humidity.summary(print_fn=lambda x: st.text(x))
+
+class MyCallback(Callback):
+    def on_epoch_end(self, epoch, logs=None):
+        if (epoch+1) % 50 == 0 and epoch>0:
+            ""
+            #print("Epoch number {} done".format(epoch+1))
+
+batch_size=8
+num_epochs = 1000
+
+
+#model_humidity.fit(trainX,trainY, 
+          #epochs=num_epochs, 
+          #batch_size=batch_size, 
+          #callbacks=[MyCallback()],verbose=0)
+
+
+#model_humidity.fit(trainX,trainY, 
+          #epochs=num_epochs, 
+          #batch_size=batch_size, 
+          #callbacks=[MyCallback()],verbose=0)
+#plt.figure(figsize=(7,5))
+#plt.title("RMSE loss over epochs",fontsize=16)
+#plt.plot(np.sqrt(model_humidity.history.history['loss']),c='k',lw=2)
+#plt.grid(True)
+#plt.xlabel("Epochs",fontsize=14)
+#plt.ylabel("Root-mean-squared error",fontsize=14)
+#plt.xticks(fontsize=14)
+#plt.yticks(fontsize=14)
+#plt.show()          
+
+
+plt.figure(figsize=(15,4))
+plt.title("This is what the model saw",fontsize=18)
+plt.plot(trainX[:,0][:,0],c='blue')
+plt.grid(True)
+plt.show()
 
