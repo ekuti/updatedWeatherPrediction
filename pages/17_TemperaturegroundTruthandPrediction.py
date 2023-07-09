@@ -8,7 +8,7 @@ import matplotlib
 from PIL import Image
 ##
 
-image = Image.open('../images/8.png')
+image = Image.open('8.png')
 #matplotlib.use('TkAgg')
 import matplotlib.pyplot as plt
 
@@ -209,4 +209,4 @@ plt.yticks(fontsize=14)
 plt.show()
 
 
-st.image(image, caption='Last image')
+st.image(image, caption='Ground Truth and Prediction plot Graph')
