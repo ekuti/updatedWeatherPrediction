@@ -103,7 +103,8 @@ class MyCallback(Callback):
             #st.text("Epoch number {} done".format(epoch+1))
 
 batch_size=8
-num_epochs = 1000
+num_epochs = 400
+#num_epochs = 1000
 
 
 #model_humidity.fit(trainX,trainY, 
