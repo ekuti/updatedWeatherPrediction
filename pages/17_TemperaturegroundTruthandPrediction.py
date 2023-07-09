@@ -5,7 +5,7 @@ import numpy as np
 import matplotlib
 
 #matplotlib.use('TkAgg')
-#import matplotlib.pyplot as plt
+import matplotlib.pyplot as plt
 
 pd.set_option('mode.chained_assignment', None)
 
