@@ -5,10 +5,10 @@ import numpy as np
 import matplotlib
 
 ##
-f#rom PIL import Image
+from PIL import Image
 ##
 
-#image = Image.open('../images/8.png')
+image = Image.open('../images/8.png')
 #matplotlib.use('TkAgg')
 import matplotlib.pyplot as plt
 
@@ -209,4 +209,4 @@ plt.yticks(fontsize=14)
 plt.show()
 
 
-#st.image(image, caption='Last image')
+st.image(image, caption='Last image')
