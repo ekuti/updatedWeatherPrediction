@@ -8,6 +8,10 @@ import numpy as np
 
 import matplotlib.pyplot as plt
 
+from PIL import Image
+
+image = Image.open('3.png')
+
 pd.set_option('mode.chained_assignment', None)
 
 
@@ -128,6 +132,8 @@ num_epochs = 1000
 #plt.yticks(fontsize=14)
 #plt.show()          
 
+
+st.image(image, caption='Result analysis')
 
 plt.figure(figsize=(15,4))
 plt.title("This is what the model saw",fontsize=18)
