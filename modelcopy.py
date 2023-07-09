@@ -161,8 +161,6 @@ plt.xticks(fontsize=14)
 plt.yticks(fontsize=14)
 plt.show()          
 
-##I stopped here
-
 plt.figure(figsize=(15,4))
 plt.title("This is what the model saw",fontsize=18)
 plt.plot(trainX[:,0][:,0],c='blue')
@@ -194,7 +192,7 @@ plt.xticks(fontsize=14)
 plt.yticks(fontsize=14)
 plt.ylim(-20,120)
 plt.show()
-#start ModelTemp
+
 train = np.array(temp_SF['San Francisco'][:Tp])
 test = np.array(temp_SF['San Francisco'][Tp:])
 
@@ -223,7 +221,7 @@ model_temp.fit(trainX,trainY,
           epochs=num_epochs, 
           batch_size=batch_size, 
           callbacks=[MyCallback()],verbose=0)
-##I Think it ends here
+
 plt.figure(figsize=(7,5))
 plt.title("RMSE loss over epochs",fontsize=16)
 plt.plot(np.sqrt(model_temp.history.history['loss']),c='k',lw=2)
@@ -233,7 +231,7 @@ plt.ylabel("Root-mean-squared error",fontsize=14)
 plt.xticks(fontsize=14)
 plt.yticks(fontsize=14)
 plt.show()
-######################################
+
 trainPredict = model_temp.predict(trainX)
 testPredict= model_temp.predict(testX)
 predicted=np.concatenate((trainPredict,testPredict),axis=0)
@@ -252,7 +250,7 @@ plt.xticks(fontsize=14)
 plt.yticks(fontsize=14)
 plt.show()
 
-###########################
+
 train = np.array(pressure_SF['San Francisco'][:Tp])
 test = np.array(pressure_SF['San Francisco'][Tp:])
 

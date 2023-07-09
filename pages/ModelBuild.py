@@ -64,18 +64,7 @@ print("Test data shape:", testX.shape,', ',testY.shape)
 st.title("Building the Model")
 st.markdown(
     "Keras model with SimpleRNN layer We build a simple function to define the RNN model. It uses a single neuron for the output layer because we are predicting a real-valued number here. As activation, it uses the ReLU function. Following arguments are supported.")
-st.markdown(
-    "Neurons in RNN layer"
-)
-st.markdown(
-    "Embedding length(i.e the length we chose)"
-)
-st.markdown(
-     "Neurons in densly connected layer"
-)
-st.markdown(
-      "learning rate"
-)
+
 
 def build_simple_rnn(num_units=128, embedding=4,num_dense=32,lr=0.001):
     """
