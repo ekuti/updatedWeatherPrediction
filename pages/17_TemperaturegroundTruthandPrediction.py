@@ -99,7 +99,7 @@ model_humidity = build_simple_rnn(num_units=128,num_dense=32,embedding=8,learnin
 class MyCallback(Callback):
     def on_epoch_end(self, epoch, logs=None):
         if (epoch+1) % 50 == 0 and epoch>0:
-             ""
+             
             st.text("Epoch number {} done".format(epoch+1))
 
 batch_size=8
