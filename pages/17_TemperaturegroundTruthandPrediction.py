@@ -100,7 +100,7 @@ class MyCallback(Callback):
     def on_epoch_end(self, epoch, logs=None):
         if (epoch+1) % 50 == 0 and epoch>0:
              ""
-            #st.text("Epoch number {} done".format(epoch+1))
+            st.text("Epoch number {} done".format(epoch+1))
 
 batch_size=8
 num_epochs = 400
