@@ -8,6 +8,10 @@ import numpy as np
 
 import matplotlib.pyplot as plt
 
+from PIL import Image
+
+image = Image.open('2.png')
+
 
 pd.set_option('mode.chained_assignment', None)
 
@@ -122,3 +126,5 @@ plt.xticks(fontsize=14)
 plt.yticks(fontsize=14)
 plt.show()          
 
+
+st.image(image, caption='RSME LOSS PLOT')

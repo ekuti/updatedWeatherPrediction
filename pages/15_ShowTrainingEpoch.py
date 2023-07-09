@@ -8,6 +8,9 @@ import numpy as np
 
 import matplotlib.pyplot as plt
 
+from PIL import Image
+image = Image.open('7.png')
+
 pd.set_option('mode.chained_assignment', None)
 
 

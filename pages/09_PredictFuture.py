@@ -8,6 +8,9 @@ import numpy as np
 
 import matplotlib.pyplot as plt
 
+from PIL import Image
+image = Image.open('4.png')
+
 pd.set_option('mode.chained_assignment', None)
 
 
@@ -137,7 +140,7 @@ predicted=np.concatenate((trainPredict,testPredict),axis=0)
 
 
 
-
+st.image(image, caption='Predicted Graph')
 
 plt.figure(figsize=(10,4))
 plt.title("This is what the model predicted",fontsize=18)

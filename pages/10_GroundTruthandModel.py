@@ -8,6 +8,9 @@ import numpy as np
 
 import matplotlib.pyplot as plt
 
+from PIL import Image
+image = Image.open('5.png')
+
 pd.set_option('mode.chained_assignment', None)
 
 
@@ -147,6 +150,8 @@ predicted=np.concatenate((trainPredict,testPredict),axis=0)
 
 index = humidity_SF.index.values
 
+st.image(image, caption='Ground Truth & Model Graph')
+
 plt.figure(figsize=(15,5))
 plt.title("Humidity: Ground truth and prediction together",fontsize=18)
 plt.plot(index,humidity_SF['San Francisco'],c='blue')
@@ -158,3 +163,4 @@ plt.xticks(fontsize=14)
 plt.yticks(fontsize=14)
 plt.ylim(-20,120)
 plt.show()
+

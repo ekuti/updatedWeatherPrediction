@@ -8,6 +8,10 @@ import numpy as np
 
 import matplotlib.pyplot as plt
 
+from PIL import Image
+image = Image.open('6.png')
+
+
 pd.set_option('mode.chained_assignment', None)
 
 
@@ -185,6 +189,8 @@ model_temp.fit(trainX,trainY,
           batch_size=batch_size, 
           callbacks=[MyCallback()],verbose=0)
 ##I Think it ends here
+
+st.image(image, caption='RSME Loss Temperature')
 
 plt.figure(figsize=(7,5))
 plt.title("RMSE loss over epochs",fontsize=16)

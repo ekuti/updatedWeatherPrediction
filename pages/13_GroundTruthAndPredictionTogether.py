@@ -8,6 +8,9 @@ import numpy as np
 
 import matplotlib.pyplot as plt
 
+from PIL import Image
+image = Image.open('6.png')
+
 pd.set_option('mode.chained_assignment', None)
 
 
@@ -230,6 +233,8 @@ predicted=np.concatenate((trainPredict,testPredict),axis=0)
 
 
 index = pressure_SF.index.values
+
+st.image(image, caption='Ground Truth And Prediction')
 
 plt.figure(figsize=(15,5))
 plt.title("Pressure: Ground truth and prediction together",fontsize=18)
