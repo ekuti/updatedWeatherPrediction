@@ -4,6 +4,11 @@ import pandas as pd
 import numpy as np
 import matplotlib
 
+##
+f#rom PIL import Image
+##
+
+#image = Image.open('../images/8.png')
 #matplotlib.use('TkAgg')
 import matplotlib.pyplot as plt
 
@@ -202,3 +207,6 @@ plt.grid(True)
 plt.xticks(fontsize=14)
 plt.yticks(fontsize=14)
 plt.show()
+
+
+#st.image(image, caption='Last image')
